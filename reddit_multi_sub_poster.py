@@ -47,15 +47,15 @@ def self_post(sub_reddit):
     reddit.subreddit(sub_reddit).submit(title=post_title, selftext=post_body)
 
 # to circumvent rate_limiter posed by sub moderators. Ratelimiter does works in sub level irrespective of user karma
-while True:
-    authenticate(reddit)
-    try:
-        list(map(lambda _: self_post(_), sub_reddit_names))
-        break
-    except praw.exceptions.APIException as e:
-        if e.error_type == 'RATELIMIT':
-            handle_rate_limit(e)
-        else:
-            raise
-
-
+for r_sub_name in sub_reddit_names:
+    while True:
+        authenticate(reddit)
+        try:
+            # list(map(lambda _: self_post(_), sub_reddit_names))
+            self_post(r_sub_name)
+            break
+        except praw.exceptions.APIException as e:
+            if e.error_type == 'RATELIMIT':
+                handle_rate_limit(e)
+            else:
+                raise
