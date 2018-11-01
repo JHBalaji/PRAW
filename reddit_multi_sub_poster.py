@@ -46,7 +46,7 @@ def self_post(sub_reddit):
     # and finally you can substitute selftext=post_body with selftext='my body/text'
     reddit.subreddit(sub_reddit).submit(title=post_title, selftext=post_body)
 
-# to circumvent rate_limiter posed by sub moderators. Reddit sub ratelimit is defined in sub level irrespective of karma
+# to circumvent rate_limiter posed by sub moderators. Ratelimiter does works in sub level irrespective of user karma
 while True:
     authenticate(reddit)
     try:
